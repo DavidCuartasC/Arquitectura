@@ -100,7 +100,7 @@ export class UnidadControlComponent {
       return undefined;
   }
 
-  obtenerOperando(operando: string): number | undefined{
+  obtenerOperando(operando: string): number | Variables | undefined{
     if (!operando) {
       return undefined;
     }
@@ -108,7 +108,7 @@ export class UnidadControlComponent {
       
     }
   
-    const variableMap: { [key: string]: number } = {
+    const variableMap: { [key: string]: Variables } = {
       "A": Variables.A,
       "B": Variables.B,
       "C": Variables.C,

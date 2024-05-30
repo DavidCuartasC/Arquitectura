@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Operaciones } from '../../modelos/operaciones';
 import { Instruccion } from '../../modelos/instruccion';
+import { MemoriaService } from '../memoria.service';
+import { Variables } from '../../modelos/variables';
 
 @Component({
   selector: 'app-alu',
@@ -15,24 +17,29 @@ export class AluComponent {
   operacion?: Operaciones
   operando1?: number;
   operando2?: number;
-  
+
   @Input()
-  set instruccion(value: Instruccion) {
-    this._instruccion = value; {
-      if(this.instruccion && this.instruccion.operacion && 
-        this.instruccion.operando2 && this.instruccion.operando3){
-       const resultado =  this.ejecutarOperacion(this.instruccion.operacion, 
-        this.instruccion.operando2, this.instruccion.operando3);
-        this.respuestaEmmiter.emit(resultado)
-      }
-  }
+    set instruccion(value: Instruccion) {
+    this._instruccion = value;
+    if (!!value && !!value.operacion && value.operando2 !== undefined && value.operando3 !== undefined) {
+        const ope1 = value.operando2 in Variables ? this.memoria.obtenerDato(value.operando2 as Variables) : value.operando2;
+        const ope2 = value.operando3 in Variables ? this.memoria.obtenerDato(value.operando3 as Variables) : value.operando3;
+        const resultado = this.ejecutarOperacion(value.operacion, ope1, ope2);
+        this.memoria.guardarDato(value.operando1, resultado);
+        this.respuestaEmiter.emit(resultado);
+    }
 }
 
-  @Output() respuestaEmmiter = new EventEmitter<number>();
+  @Output() respuestaEmiter = new EventEmitter<number>();
 
   get instruccion(): Instruccion {
     return this._instruccion;
-  } 
+  }
+
+  constructor(
+    public memoria: MemoriaService
+  ) {
+  }
 
   ejecutarOperacion(
     operacion: Operaciones,
@@ -91,9 +98,9 @@ export class AluComponent {
     if (operando1 == undefined || operando1 == null || operando1 == 0) {
       operando1 = 1;
     }
-    return operando1 ++;
+    return operando1++;
   }
-  
+
   private negar(operando1: number): number {
     if (operando1 == 0) {
       return 1;

@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Instruccion } from './modelos/instruccion';
+import { AluComponent } from "./componentes/alu/alu.component";
+import { MemoriaService } from './componentes/memoria.service';
 import { MemoriaComponent } from "./componentes/memoria/memoria.component";
 import { UnidadControlComponent } from './componentes/unidad-control/unidad-control.component';
-import { AluComponent } from "./componentes/alu/alu.component";
+import { Instruccion } from './modelos/instruccion';
 import { Operaciones } from './modelos/operaciones';
-import { DatosAGuardar } from './modelos/datosAGuardar';
+import { Variables } from './modelos/variables';
 
 @Component({
   selector: 'app-root',
@@ -18,13 +19,15 @@ import { DatosAGuardar } from './modelos/datosAGuardar';
 })
 export class AppComponent {
   title = 'Arquitectura';
+  variables = Object.keys(Variables).filter(key => isNaN(Number(key)));
   public operacionALU!: Instruccion;
   public respuestaALU!: number;
-  public guardarEnMemoria!: DatosAGuardar;
   public setInstrucciones: string[] = [];
   fGroup: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    public memoria: MemoriaService
+  ) {
   }
 
   ngOnInit() {
@@ -46,21 +49,13 @@ export class AppComponent {
   }
 
   public pasarInstruccion(instruccion: Instruccion) {
-    if (instruccion.operacion == Operaciones.MOVE) {
-      const datos = {
-        dato1: instruccion.operando1,
-        dato2: instruccion.operando2
-      } as DatosAGuardar
-      this.guardarEnMemoria = datos;
-    } else {
-      this.operacionALU = instruccion;
-      const datos = {
-        dato1: instruccion.operando1,
-        dato2: this.respuestaALU
-      } as DatosAGuardar
-      this.guardarEnMemoria = datos;
-    }
-
+    setTimeout(() => {
+      if (instruccion.operacion == Operaciones.MOVE && instruccion.operando2) {
+        this.memoria.guardarDato(instruccion.operando1, instruccion.operando2);
+      } else {
+        this.operacionALU = instruccion;
+      }
+    }, 1000);
   }
 
   public respuestaDeALU(valor: number) {

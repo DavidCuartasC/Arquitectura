@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="cent">
-      <app-alu [instruccion]="operacionALU" (respuestaEmmiter)="respuestaDeALU($event)">
+      <app-alu [instruccion]="operacionALU" (respuestaEmiter)="respuestaDeALU($event)">
       </app-alu>
     </div>
     <div class="der">
@@ -37,6 +37,9 @@
   <div class="busDatos"> </div>
   <div class="busControl"> </div>
   <div class="memoria">
-    <app-memoria [datos]="guardarEnMemoria"></app-memoria>
+
+    <div *ngFor="let item of memoria.memoriaDatos; let i = index">
+      {{ item }} - {{ variables[i] }}
+  </div>
   </div>
 </body>
