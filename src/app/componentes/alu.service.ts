@@ -7,6 +7,7 @@ export class AluService {
   public instruccion: number = 0;
   public datos1: number = 0;
   public datos2: number = 0;
+  
   constructor() { }  
 
   public ejecutarOperacion(

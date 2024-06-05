@@ -66,12 +66,7 @@ export class UnidadControlComponent {
       await this.actualizarComponente(Componentes.MBR);
       await this.actualizarComponente(Componentes.IR);
       this.IR = await this.MAR_MBR.getIntruccion(codificada[0]);
-      if (codificada[1].startsWith('[') && codificada[1].endsWith(']')) {
-        const input = this.processInput(codificada[1]);
-        const digito = isNaN(Number(input))? input: Number(input); 
-      }
-      const digito = this.processInput(codificada[1]);
-      //const direccion = await this.MAR_MBR.getDireccion(codificada[1]);
+      const direccion = await this.MAR_MBR.getDireccion(codificada[1]);
       this.RVU[0] = await this.MAR_MBR.getDato(codificada[2]);
       this.RVU[1] = codificada[3] ? await this.MAR_MBR.getDato(codificada[3]) : 0;
 
@@ -93,6 +88,11 @@ export class UnidadControlComponent {
       throw new Error("No je que es eso");
     }
   }
+
+}
+
+export interface RVU {
+  A:number
 
 }
 
