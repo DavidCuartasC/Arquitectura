@@ -1,1 +1,44 @@
-<p>unidad-control works!</p>
+<div class="processor w-full m-7">
+    <div class="flex w-full">
+        <div class="flex flex-col grow">
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.UC]}">UC</div>
+            <div class="componets flex flex-col items-center" 
+            [ngClass]="{'isActive': componentesActivo[componentes.ALU]}">
+                ALU
+                <div class="flex">
+                    <div>
+                    {{RVU[0]}}
+                </div> | ****
+                <div class="px-2">
+                    {{IR}}
+                </div>  **** |
+                <div>
+                    {{RVU[1]}}
+                </div>
+                </div>
+                
+            </div>
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.RVU]}">RVU</div>    
+        </div>
+
+        <div class="flex flex-col grow-0">
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.PC]}">
+                PC
+                <div>
+                    {{PC}}
+                </div>
+            </div>
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.MAR]}">
+                MAR
+            </div>
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.MBR]}">
+                MBR</div>
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.IR]}">
+                IR
+                <div>
+                    {{IR}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

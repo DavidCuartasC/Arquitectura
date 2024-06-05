@@ -1,9 +1,9 @@
 import { Operaciones } from "./operaciones";
+import { Variables } from "./variables";
 
 export interface Instruccion {
-    operacion: Operaciones,
-    operando1: number,
-    operando2?: number,
-    operando3?: number,
-    textoInstruccion: string
+    instruccion: number,
+    direccion: number,
+    dato1: number,
+    dato2?: number
 }

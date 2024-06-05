@@ -19,9 +19,7 @@ import { Variables } from './modelos/variables';
 })
 export class AppComponent {
   title = 'Arquitectura';
-  variables = Object.keys(Variables).filter(key => isNaN(Number(key)));
-  public operacionALU!: Instruccion;
-  public respuestaALU!: number;
+  public enEjecucion = false;
   public setInstrucciones: string[] = [];
   fGroup: FormGroup = new FormGroup({});
 
@@ -40,30 +38,17 @@ export class AppComponent {
     })
   }
 
-  cargarYEjecutarInstrucciones() {
-    this.guardarInstruccionesEnMemoria();
-  }
-
-  public guardarInstruccionesEnMemoria() {
+  public cargarInstrucciones() {
     this.setInstrucciones = this.getSetInstrucciones.split('\n');
-  }
-
-  public pasarInstruccion(instruccion: Instruccion) {
-    setTimeout(() => {
-      if (instruccion.operacion == Operaciones.MOVE && instruccion.operando2) {
-        this.memoria.guardarDato(instruccion.operando1, instruccion.operando2);
-      } else {
-        this.operacionALU = instruccion;
-      }
-    }, 1000);
-  }
-
-  public respuestaDeALU(valor: number) {
-    this.respuestaALU = valor;
+    this.enEjecucion = true
   }
 
   get getSetInstrucciones() {
     return this.fGroup?.get('setInstrucciones')?.value || '';
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 
 

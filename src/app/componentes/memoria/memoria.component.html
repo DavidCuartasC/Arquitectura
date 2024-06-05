@@ -1,7 +1,19 @@
-<div class="container-componentes-finales">
-
-    <div *ngFor="let item of memoriaDatos; let i = index">
-        {{ item }} - {{ variables[i] }}
+<div class="memo ml-6 w-full">
+    <div class="title flex flex-col flex-wrap p-3">Memoria</div>
+    <div class="grid grid-cols-2">
+        <div class="flex justify-center items-center" *ngFor="let item of memoriaDatos; let i = index"
+        [ngClass]="{'isActive': getIsActive(i)}">
+            <div class="border p-1 border-black w-full">
+                {{ MAR_MBR.memoria[i] }}
+            </div>
+            <div class="border p-1 bg-emerald-400 border-black w-16">
+                {{ i }}
+            </div>
+        </div>
     </div>
-
+    <div class="grid grid-cols-2 p-3 border border-black">
+        <div *ngFor="let key of operacionKeys">
+            {{ key }} {{ MAR_MBR.operacionMap[key] }}
+        </div>
+    </div>
 </div>

@@ -9,15 +9,27 @@ export class MemoriaService {
   variables = Object.keys(Variables).filter(key => isNaN(Number(key)));
   constructor() { }
 
-  obtenerDato(direccion: number): number {
+  obtenerDireccion = (entrada: number | Variables): number => {
+      if (typeof entrada === 'string') {
+        const direccion = Object.values(Variables).indexOf(entrada);
+        return direccion;
+      } else {
+        return entrada;
+      }
+    };
+
+  obtenerDato(dato: number | Variables): number {
+    const direccion = this.obtenerDireccion(dato);
     return this.memoriaDatos[direccion];
   }
 
-  guardarDato(variable: Variables, dato: number | Variables): void {
-    if (dato in Variables) {
-      this.memoriaDatos[variable] = this.memoriaDatos[dato];
-    } else {
-      this.memoriaDatos[variable] = dato;
+  guardarDato(variable: number | Variables, dato: number | Variables): void {     
+    try {
+      const direccionAGuardar = this.obtenerDireccion(variable);
+      const valorAGuardar = typeof dato === 'string' ? this.memoriaDatos[this.obtenerDireccion(dato)] : dato;  
+      this.memoriaDatos[direccionAGuardar] = valorAGuardar;
+    } catch (error) {
+      console.error(error);
     }
   }
 }

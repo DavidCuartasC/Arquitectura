@@ -1,0 +1,24 @@
+.processor {   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    padding: 30px;
+    text-align: center;
+    border-width: 3px;
+    border-color: gray;
+    background-color: lightblue;
+    border-radius: 5px;
+  }
+
+.componets{
+  font-weight: 500;
+  font-size: 2rem; /* 36px */
+  line-height: 2rem;  
+  padding: 15px;
+  border-radius: 6px;
+  border-width: 2px ;
+  border-color: black;
+  margin: 10px;
+}

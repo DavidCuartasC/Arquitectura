@@ -1,0 +1,17 @@
+.memo {   
+    font-family: sans-serif;
+    text-align: center;
+    border-width: 3px;
+    border-color: gray;
+    background-color: lightblue;
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 1.5rem; /* 36px */
+    line-height: 1.5rem;  
+  }
+
+.title{
+    font-weight: 500;
+  font-size: 2rem; /* 36px */
+  line-height: 2rem;  
+}

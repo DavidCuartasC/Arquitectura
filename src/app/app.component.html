@@ -1,45 +1,28 @@
-<form [formGroup]="fGroup">
-  <label for="myTextarea">Text Area:</label>
-  <textarea id="myTextarea" formControlName="setInstrucciones"></textarea>
-  <button type="submit" (click)="guardarInstruccionesEnMemoria()">Iniciar</button>
-</form>
+<body class="flex justify-center items-center m-6">
+  <form [formGroup]="fGroup" class="flex flex-col justify-around h-full items-center">
+    <textarea rows="12"
+      class="block p-2.5 text-gray-900 bg-gray-400 rounded-lg border border-gray-700 focus:ring-blue-500 focus:border-blue-500 resize-none text-3xl w-full"
+      formControlName="setInstrucciones">
+  </textarea>
+  <ng-container *ngIf="!enEjecucion; else reiniciarTemplate">
+    <button class="mt-4 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            (click)="cargarInstrucciones()">
+      Ejecutar
+    </button>
+  </ng-container>
+  
+  <ng-template #reiniciarTemplate>
+    <button class="mt-4 bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:red-blue-500 rounded"
+            (click)="reloadPage()">
+      Reiniciar
+    </button>
+  </ng-template>
+  </form>
+  <div class="w-full flex justify-center items-center">
+    <app-unidad-control class="w-2/3" [instrucciones]="setInstrucciones">
+    </app-unidad-control>
+    <app-memoria class="w-1/3 mx-7"></app-memoria>
+  </div>
 
-<body>
-  <div class="cpu">
-    <div class="izq">
-      <div class="rvu">
-        <h4>RVU</h4>
-      </div>
-    </div>
-    <div class="cent">
-      <app-alu [instruccion]="operacionALU" (respuestaEmiter)="respuestaDeALU($event)">
-      </app-alu>
-    </div>
-    <div class="der">
-      <div class="ir com">
-        <h4>IR</h4>
-      </div>
-      <app-unidad-control class="uc com" [instrucciones]="setInstrucciones"
-        (instruccionEmitter)="pasarInstruccion($event)">
-      </app-unidad-control>
-      <div class="mar com">
-        <h4>MAR</h4>
-      </div>
-      <div class="mbr com">
-        <h4>MBR</h4>
-      </div>
-      <div class="pc com">
-        <h4>PC</h4>
-      </div>
-    </div>
-  </div>
-  <div class="busDirec"> </div>
-  <div class="busDatos"> </div>
-  <div class="busControl"> </div>
-  <div class="memoria">
 
-    <div *ngFor="let item of memoria.memoriaDatos; let i = index">
-      {{ item }} - {{ variables[i] }}
-  </div>
-  </div>
 </body>
