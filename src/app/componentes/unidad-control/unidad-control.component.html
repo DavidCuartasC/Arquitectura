@@ -1,55 +1,55 @@
 <div class="flex">
-<div class="processor w-full m-1 flex grow">
-    <div class="flex w-full">
-        <div class="flex flex-col grow">
-            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.UC]}">UC</div>
-            <div class="componets flex flex-col items-center"
-                [ngClass]="{'isActive': componentesActivo[componentes.ALU]}">
-                ALU
-                <div class="flex">
+    <div class="processor w-full m-1 flex grow">
+        <div class="flex w-full">
+            <div class="flex flex-col grow">
+                <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.UC]}">UC</div>
+                <div class="componets flex flex-col items-center"
+                    [ngClass]="{'isActive': componentesActivo[componentes.ALU]}">
+                    ALU
+                    <div class="flex">
+                        <div>
+                            {{datos[0]}}
+                        </div> | ****
+                        <div class="px-2">
+                            {{IR}}
+                        </div> **** |
+                        <div>
+                            {{datos[1]}}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.RVU]}">
+                    Registros
+                    <div class="grid grid-cols-2 my-2">
+                        <div *ngFor="let key of variableMap; let i = index">
+                            {{ key }} = {{ RVU.RVU[i] }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col grow-0">
+                <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.PC]}">
+                    PC
                     <div>
-                        {{datos[0]}}
-                    </div> | ****
-                    <div class="px-2">
+                        {{PC}}
+                    </div>
+                </div>
+                <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.MAR]}">
+                    MAR
+                </div>
+                <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.MBR]}">
+                    MBR</div>
+                <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.IR]}">
+                    IR
+                    <div>
                         {{IR}}
-                    </div> **** |
-                    <div>
-                        {{datos[1]}}
                     </div>
-                </div>
-
-            </div>
-            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.RVU]}">
-                Registros
-                <div class="grid grid-cols-2 my-2">
-                    <div *ngFor="let key of variableMap; let i = index">
-                        {{ key }} = {{ RVU.RVU[i] }}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="flex flex-col grow-0">
-            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.PC]}">
-                PC
-                <div>
-                    {{PC}}
-                </div>
-            </div>
-            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.MAR]}">
-                MAR
-            </div>
-            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.MBR]}">
-                MBR</div>
-            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.IR]}">
-                IR
-                <div>
-                    {{IR}}
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <div class="flex grow-0 my-2">
     <div class="h-full bg-[#164e63] m-0.5 p-px w-10" [ngClass]="{'isActive': componentesActivo[componentes.BusDatos]}" style="writing-mode: vertical-rl;">
@@ -62,5 +62,19 @@
         Bus de Control
     </div>
 </div>
+    <div class="flex grow-0">
+        <div class="h-full bg-[#164e63] m-0.5 p-px w-10"
+            [ngClass]="{'isActive': componentesActivo[componentes.BusDatos]}" style="writing-mode: vertical-rl;">
+            Bus de datos
+        </div>
+        <div class="h-full bg-[#164e63] m-0.5 p-px w-8"
+            [ngClass]="{'isActive': componentesActivo[componentes.BusDirecciones]}" style="writing-mode: vertical-rl;">
+            Bus de Direcciones
+        </div>
+        <div class="h-full bg-[#164e63] m-0.5 p-px w-6"
+            [ngClass]="{'isActive': componentesActivo[componentes.BusControl]}" style="writing-mode: vertical-rl;">
+            Bus de Control
+        </div>
+    </div>
 
 </div>
