@@ -108,18 +108,18 @@ export class UnidadControlComponent {
       this.IR = await this.MAR_MBR.getIntruccion(codificada[0]);
 
       if (this.IR === 1010 || this.IR === 1011) {
-        if (this.flag === 0) {
+        if (this.flag === 0 && this.IR === 1010) {
           const salto = this.loop.find(f => f[0] === codificada[1]);
           if (salto) {
-            index = Number(salto[1]) + 1;
+            index = Number(salto[1]);
             continue;
           } else {
             throw new Error(" Ese salto no existe")
           }
-        } else {
+        } else if (this.IR === 1011 && this.flag !== 0) {
           const salto = this.loop.find(f => f[0] === codificada[1]);
           if (salto) {
-            index = Number(salto[1]) + 1;
+            index = Number(salto[1]);
             continue;
           } else {
             throw new Error(" Ese salto no existe")
@@ -127,10 +127,10 @@ export class UnidadControlComponent {
         }
       }
 
-      if (this.IR !== 1001 && this.IR !== 1010 && this.IR !== 1011 && this.hasBrakets(codificada[1])) {
+      if (this.IR != 1001 && this.IR !== 1010 && this.IR !== 1011 && this.hasBrakets(codificada[1])) {
         const input = this.processInput(codificada[1]);
         direccion = isNaN(Number(input)) ? this.RVU.getValor(input) : Number(input);
-      } else if (isNaN(Number(codificada[1])) && this.IR !== 1001 && this.IR !== 1010 && this.IR !== 1011 ) {
+      } else if (isNaN(Number(codificada[1])) && this.IR !== 1001 && this.IR !== 1010 && this.IR !== 1011) {
         seGuardaEnVariable = true;
         direccion = this.RVU.getDireccion(codificada[1]);
       }
@@ -138,15 +138,15 @@ export class UnidadControlComponent {
       if (this.IR === 1001) {
         codificada[3] = codificada[2];
         codificada[2] = codificada[1];
-        n++;
+        n = n === 3 ? n : n + 1;
       }
 
       for (let i = 2; i <= n; i++) {
-        if (this.IR !== 1001 && this.IR !== 1010 && this.IR !== 1011 && this.hasBrakets(codificada[i])) {
+        if (this.IR !== 1010 && this.IR !== 1011 && this.hasBrakets(codificada[i])) {
           const input = this.processInput(codificada[i]);
           this.datos[i - 2] = isNaN(Number(input)) ? this.MAR_MBR.getDato(this.RVU.getValor(input)) :
             this.MAR_MBR.getDato(Number(input));
-        } else if(this.IR !== 1001 && this.IR !== 1010 && this.IR !== 1011) {
+        } else if (this.IR !== 1010 && this.IR !== 1011) {
           this.datos[i - 2] = isNaN(Number(codificada[i])) ? this.RVU.getValor(codificada[i]) : Number(codificada[i]);
         }
       }
@@ -154,6 +154,7 @@ export class UnidadControlComponent {
       if (this.IR === 1001) {
         await this.actualizarComponente(Componentes.ALU);
         this.flag = this.Alu.ejecutarOperacion(this.IR, this.datos[0], this.datos[1]);
+        let s = this.flag
       } else {
         this.ejecutarInstruccion(direccion, seGuardaEnVariable);
       }
