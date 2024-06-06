@@ -15,9 +15,6 @@ export class AluService {
     dato1: number,
     dato2: number
   ): number {
-    this.instruccion = instruccion;
-    this.datos1 = dato1;
-    this.datos2 =  dato2;
 
     switch (instruccion) {
       case 1:
@@ -29,7 +26,7 @@ export class AluService {
       case 11:
         return this.div(dato1, dato2);
       case 101:
-        return this.incrementar(dato1);
+        return this.exp(dato1, dato2);
       case 110:
         return this.xor(dato1, dato2)
       case 111:
@@ -37,7 +34,7 @@ export class AluService {
       case 1000:
         return this.or(dato1, dato2);
       case 1001:
-        return this.comparar(dato1, dato2);
+        return this.cmp(dato1, dato2);
       default:
         return 0;
     }
@@ -61,13 +58,6 @@ export class AluService {
     } else {
       return 0;
     }
-  }
-
-  private incrementar(dato1: number): number {
-    if (dato1 == undefined || dato1 == null || dato1 == 0) {
-      dato1 = 1;
-    }
-    return dato1++;
   }
 
   private xor(dato1: number, dato2:number): number {
@@ -94,7 +84,7 @@ export class AluService {
     }
   }
 
-  private comparar(dato1: number, dato2: number): number {
+  private cmp(dato1: number, dato2: number): number {
     if (dato1 == dato2) {
       return 0;
     } else if (dato1 > dato2) {
@@ -103,4 +93,9 @@ export class AluService {
       return -1;
     }
   }
+
+  private exp(dato1: number, dato2: number): number {
+     return  Math.pow(dato1, dato2);
+  }
+
 }

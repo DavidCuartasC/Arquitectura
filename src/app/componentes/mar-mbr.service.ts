@@ -15,13 +15,13 @@ export class MARMBRService {
     "SUB": 10,
     "DIV": 11,
     "MOVE": 100,
-    "INC": 101,
+    "EXP": 101,
     "XOR": 110,
     "AND": 111,
     "OR": 1000,
-    "LOOP": 1001,
-    "JMP": 1010,
-    "JNE": 1011
+    "CMP": 1001,
+    "JNE": 1010,
+    "JNZ": 1011
   };
 
   public async getIntruccion(operacion: string): Promise<number> {
@@ -33,7 +33,6 @@ export class MARMBRService {
     } else {
       throw new Error("No conozco de eso");
     }
-
   }
 
   public getDato(direccion: number): number {
