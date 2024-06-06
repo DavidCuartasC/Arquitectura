@@ -7,18 +7,23 @@
                 ALU
                 <div class="flex">
                     <div>
-                    {{RVU[0]}}
                 </div> | ****
                 <div class="px-2">
                     {{IR}}
                 </div>  **** |
                 <div>
-                    {{RVU[1]}}
                 </div>
                 </div>
                 
             </div>
-            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.RVU]}">RVU</div>    
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.RVU]}">
+                RVU
+                <div class="grid grid-cols-2">
+                    <div *ngFor="let key of variableMap; let i = index">
+                        {{ key }} {{ RVU.RVU[i] }}
+                    </div>
+                </div>
+            </div>    
         </div>
 
         <div class="flex flex-col grow-0">
