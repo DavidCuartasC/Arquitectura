@@ -4,12 +4,15 @@
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
-    padding: 30px;
+    padding: 35px;
     text-align: center;
     border-width: 3px;
-    border-color: gray;
-    background-color: lightblue;
+    background-color: #B4B4B8;
+    background-position: center; 
+    background-size: cover;      
+    background-repeat: no-repeat;
     border-radius: 5px;
+    border: none;
   }
 
 .componets{
@@ -18,7 +21,12 @@
   line-height: 2rem;  
   padding: 15px;
   border-radius: 6px;
-  border-width: 2px ;
-  border-color: black;
+  border-width: 1px ;
+  background-color: #164e63;
   margin: 10px;
+}
+
+.process{
+  display: flex; /* Agregar display: flex para que funcione align-items */
+  justify-content: center;
 }

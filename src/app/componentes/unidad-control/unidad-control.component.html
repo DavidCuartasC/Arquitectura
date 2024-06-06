@@ -2,7 +2,7 @@
     <div class="flex w-full">
         <div class="flex flex-col grow">
             <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.UC]}">UC</div>
-            <div class="componets flex flex-col items-center" 
+            <div class="componets process flex flex-col items-center" 
             [ngClass]="{'isActive': componentesActivo[componentes.ALU]}">
                 ALU
                 <div class="flex">
@@ -39,6 +39,15 @@
                     {{IR}}
                 </div>
             </div>
+        </div>
+
+        <div class="Buses">
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.BusDatos]}">
+                MBR</div>
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.BusDirecciones]}">
+                    MBR</div>
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.BusControl]}">
+                        MBR</div>
         </div>
     </div>
 </div>

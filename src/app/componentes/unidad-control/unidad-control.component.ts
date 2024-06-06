@@ -64,6 +64,8 @@ export class UnidadControlComponent {
       const codificada = this.instruccionesCodificadas[index];
       await this.actualizarComponente(Componentes.MAR);
       await this.actualizarComponente(Componentes.MBR);
+      await this.actualizarComponente(Componentes.BusDirecciones);
+      await this.actualizarComponente(Componentes.BusControl);
       await this.actualizarComponente(Componentes.IR);
       this.IR = await this.MAR_MBR.getIntruccion(codificada[0]);
       const direccion = await this.MAR_MBR.getDireccion(codificada[1]);
