@@ -89,6 +89,8 @@ export class UnidadControlComponent {
 
       await this.actualizarComponente(Componentes.MAR);
       await this.actualizarComponente(Componentes.MBR);
+      await this.actualizarComponente(Componentes.BusDirecciones);
+      await this.actualizarComponente(Componentes.BusControl);
       await this.actualizarComponente(Componentes.IR);
       this.IR = await this.MAR_MBR.getIntruccion(codificada[0]);
       
