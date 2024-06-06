@@ -2,23 +2,30 @@
     <div class="flex w-full">
         <div class="flex flex-col grow">
             <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.UC]}">UC</div>
-            <div class="componets process flex flex-col items-center" 
-            [ngClass]="{'isActive': componentesActivo[componentes.ALU]}">
+            <div class="componets flex flex-col items-center"
+                [ngClass]="{'isActive': componentesActivo[componentes.ALU]}">
                 ALU
                 <div class="flex">
                     <div>
-                    {{RVU[0]}}
-                </div> | ****
-                <div class="px-2">
-                    {{IR}}
-                </div>  **** |
-                <div>
-                    {{RVU[1]}}
+                        {{datos[0]}}
+                    </div> | ****
+                    <div class="px-2">
+                        {{IR}}
+                    </div> **** |
+                    <div>
+                        {{datos[1]}}
+                    </div>
                 </div>
-                </div>
-                
+
             </div>
-            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.RVU]}">RVU</div>    
+            <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.RVU]}">
+                Registros
+                <div class="grid grid-cols-2 my-2">
+                    <div *ngFor="let key of variableMap; let i = index">
+                        {{ key }} = {{ RVU.RVU[i] }}
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="flex flex-col grow-0">
