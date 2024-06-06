@@ -22,8 +22,7 @@ export class MemoriaComponent {
     if (memo[valor] !== this.memoriaDatos[valor]) {
       this.memoriaDatos[valor] = memo[valor];      
       return true
-    } else {
-      
+    } else {      
       return false;
     }
   }

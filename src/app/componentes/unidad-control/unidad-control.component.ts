@@ -14,6 +14,7 @@ import { RvuService } from '../rvu.service';
 export class UnidadControlComponent {
   public PC: number = 0;
   public IR: number = 0;
+  public datos = [0, 0];
   componentes = Componentes;
   componentesActivo: boolean[] = new Array(11).fill(false);
 
@@ -53,7 +54,7 @@ export class UnidadControlComponent {
     let time = 1000;
     if (valor == Componentes.MAR || valor == Componentes.MBR || valor == Componentes.BusControl
       || valor == Componentes.BusDatos || valor == Componentes.BusDirecciones) {
-      time = 300;
+      time = 500;
     }
     await new Promise(resolve => setTimeout(resolve, time));
     this.componentesActivo.fill(false);
@@ -80,7 +81,7 @@ export class UnidadControlComponent {
       this.PC = index;
       let seGuardaEnVariable = false;
       let direccion = 0;
-      let datos = [0, 0];
+      this.datos = [0, 0];
       const codificada = this.instruccionesCodificadas[index];
       const n = codificada[3] ? 3 : 2;
 
@@ -89,9 +90,6 @@ export class UnidadControlComponent {
       await this.actualizarComponente(Componentes.IR);
       this.IR = await this.MAR_MBR.getIntruccion(codificada[0]);
 
-      await this.actualizarComponente(Componentes.UC);
-      await this.actualizarComponente(Componentes.MAR);
-      await this.actualizarComponente(Componentes.MBR);
       if (this.hasBrakets(codificada[1])) {
         const input = this.processInput(codificada[1]);
         direccion = isNaN(Number(input)) ? this.RVU.getValor(input) : Number(input);
@@ -99,30 +97,36 @@ export class UnidadControlComponent {
         seGuardaEnVariable = true;
         direccion = this.RVU.getDireccion(codificada[1]);
       } else {
-        throw new Error("No je que es eso")
+        throw new Error("No je que es eso");
       }
 
       for (let i = 2; i <= n; i++) {
         if (this.hasBrakets(codificada[i])) {
           const input = this.processInput(codificada[i]);
-          datos[i - 2] = isNaN(Number(input)) ? this.MAR_MBR.getDato(this.RVU.getValor(input)) :
+          this.datos[i - 2] = isNaN(Number(input)) ? this.MAR_MBR.getDato(this.RVU.getValor(input)) :
             this.MAR_MBR.getDato(Number(input));
         } else {
-          datos[i - 2] = isNaN(Number(codificada[i])) ? this.RVU.getValor(codificada[i]) : Number(codificada[i]);
+          this.datos[i - 2] = isNaN(Number(codificada[i])) ? this.RVU.getValor(codificada[i]) : Number(codificada[i]);
         }
       }
 
       if (this.IR === 100) {
         if (seGuardaEnVariable) {
           await this.actualizarComponente(Componentes.RVU);
-          this.RVU.setDato(direccion, datos[0]);
+          this.RVU.setDato(direccion, this.datos[0]);
         } else {
-          await this.MAR_MBR.setDato(direccion, datos[0]);
+          this.MAR_MBR.setDato(direccion, this.datos[0]);
         }
       } else {
         await this.actualizarComponente(Componentes.ALU);
-        const res = this.Alu.ejecutarOperacion(this.IR, datos[0], datos[1]);
-        await this.MAR_MBR.setDato(direccion, res);
+        const res = this.Alu.ejecutarOperacion(this.IR, this.datos[0], this.datos[1]);
+        if (seGuardaEnVariable) {
+          await this.actualizarComponente(Componentes.RVU);
+          this.RVU.setDato(direccion, this.datos[0]);
+        } else {
+          this.MAR_MBR.setDato(direccion, res);
+        }
+
       }
     }
   }

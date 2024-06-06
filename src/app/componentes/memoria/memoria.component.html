@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-2 p-3 border border-black">
+    <div class="grid grid-cols-2 p-3 border border-black" [ngClass]="{'isActive': MAR_MBR.pideInstruccion}">
         <div *ngFor="let key of operacionKeys">
             {{ key }} {{ MAR_MBR.operacionMap[key] }}
         </div>
