@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
-    padding: 35px;
+    padding: 20px;
     text-align: center;
     border-width: 3px;
     background-color: #B4B4B8;
@@ -13,7 +13,6 @@
     background-repeat: no-repeat;
     border-radius: 5px;
     border: none;
-    height: 500px;
   }
 
 .componets{
@@ -27,5 +26,7 @@
   margin: 10px;
 }
 
-
+.processor, .buses{
+  height: 565px;
+}
 

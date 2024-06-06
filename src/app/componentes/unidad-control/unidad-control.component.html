@@ -1,5 +1,5 @@
-<div class="flex">
-    <div class="processor w-full m-1 flex grow">
+<div class="flex ml-2.5 my-8">
+    <div class="processor w-full flex grow">
         <div class="flex w-full">
             <div class="flex flex-col grow">
                 <div class="componets" [ngClass]="{'isActive': componentesActivo[componentes.UC]}">UC</div>
@@ -50,19 +50,7 @@
             </div>
         </div>
     </div>
-
-<div class="flex grow-0 my-2">
-    <div class="h-full bg-[#164e63] m-0.5 p-px w-10" [ngClass]="{'isActive': componentesActivo[componentes.BusDatos]}" style="writing-mode: vertical-rl;">
-        Bus de datos 
-    </div>
-    <div class="h-full bg-[#164e63] m-0.5 p-px w-8" [ngClass]="{'isActive': componentesActivo[componentes.BusDirecciones]}" style="writing-mode: vertical-rl;">
-        Bus de Direcciones
-    </div>
-    <div class="h-full bg-[#164e63] m-0.5 p-px w-6" [ngClass]="{'isActive': componentesActivo[componentes.BusControl]}" style="writing-mode: vertical-rl;">
-        Bus de Control
-    </div>
-</div>
-    <div class="flex grow-0">
+    <div class="flex grow-0 ml-1 buses">
         <div class="h-full bg-[#164e63] m-0.5 p-px w-10"
             [ngClass]="{'isActive': componentesActivo[componentes.BusDatos]}" style="writing-mode: vertical-rl;">
             Bus de datos
