@@ -26,5 +26,4 @@ export class MemoriaComponent {
       return false;
     }
   }
-
 }

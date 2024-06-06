@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { MemoriaService } from './componentes/memoria.service';
 import { MemoriaComponent } from "./componentes/memoria/memoria.component";
 import { UnidadControlComponent } from './componentes/unidad-control/unidad-control.component';
 
@@ -19,8 +18,7 @@ export class AppComponent {
   public setInstrucciones: string[] = [];
   fGroup: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder,
-    public memoria: MemoriaService
+  constructor(private fb: FormBuilder
   ) {
   }
 
