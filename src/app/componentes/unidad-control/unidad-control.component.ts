@@ -75,9 +75,11 @@ export class UnidadControlComponent {
   }
 
   private async ejecutar() {
+    let loop = 0;
     for (let index = 0; index < this.instruccionesCodificadas.length; index++) {
       await this.actualizarComponente(Componentes.UC);
       await this.actualizarComponente(Componentes.PC);
+
       this.PC = index;
       let seGuardaEnVariable = false;
       let direccion = 0;
@@ -89,6 +91,11 @@ export class UnidadControlComponent {
       await this.actualizarComponente(Componentes.MBR);
       await this.actualizarComponente(Componentes.IR);
       this.IR = await this.MAR_MBR.getIntruccion(codificada[0]);
+      
+      if (this.IR === 1001) {
+        loop = index + 1;
+        continue;
+      }
 
       if (this.hasBrakets(codificada[1])) {
         const input = this.processInput(codificada[1]);

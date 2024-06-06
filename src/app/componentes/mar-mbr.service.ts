@@ -16,10 +16,10 @@ export class MARMBRService {
     "DIV": 11,
     "MOVE": 100,
     "INC": 101,
-    "NOT": 110,
+    "XOR": 110,
     "AND": 111,
     "OR": 1000,
-    "CMP": 1001,
+    "LOOP": 1001,
     "JMP": 1010,
     "JNE": 1011
   };
